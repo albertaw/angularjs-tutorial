@@ -1,6 +1,6 @@
 ## Angular
 
-## Steps to making an Angular app:   
+#### Steps to making an Angular app:   
 I. Create a module and use ng-app in the view to define
 the application scope.  
 ```js
