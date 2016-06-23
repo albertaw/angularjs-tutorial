@@ -1,70 +1,132 @@
-## Angular
+# Angular
 
-#### Steps to making an Angular app:   
-I. Create a module and use ng-app in the view to define
-the application scope.  
+Angular is a frontend framework that allows us to separate
+our model (data) from our view.  Angular differs from other
+frontend frameworks because in addition to being able to update
+our view with our model, we can update our model with data bound
+to our view. 
+
+## Getting started
+To use Angular you will need to include the script in the head 
+of the main html file for your app. You can [download](https://angularjs.org/) the file 
+to your project and link the script or add this script that is
+hosted on Google:
+
+```
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+```
+
+The simplest way to start using Angular is to create a module, a controller, and bind the data to the view.
+
+## Modules 
+An Angular module is a container for our application code.
+It is a good practice to create the module in a file of its
+own and assign it a name.  In the following example we created
+a variable name app for our module and named the application "myApp".  We will use the app variable to attach our other code to the application.
+
 ```js
 var app = angular.module("myApp", []);
 ```
-in your view:
+
+In our view we link the module to our html using the ng-app
+directive.  This initializes our Angular application and
+determines where our application will run in the view. 
+A directive is an html attribute that lets you add functionality
+to the elements. Angular directives will begin with `ng-`.
 
 ```html
 <html ng-app="myApp">
 ```
-II. Create a controller and use ng-controller in the 
-view to define the controller scope. 
+
+## Controllers
+The glue that connects the model with our view is what is 
+called a controller. The controller can be thought of as
+a class for your application. It will hold the logic to 
+control your data.
 
 ```js
+var app = angular.module("myApp", []);
+
 app.controller('MainController', ['$scope',function($scope){
   $scope.title = "My App";
+  $scope.days = ["Monday", "Tuesay", "Wednesday", "Thursday", 
+  "Friday"];
 }]);
 ```
-in your view:
+
+This creates a controller named `'MainController'` and attaches
+the property title and days to the application $scope. To initialize the controller we use the `ng-controller` directive
+in the view.
 
 ```html
 <body ng-controller="MainController">
 ```
 
-III. Add data to $scope in the controller so it can be
-displayed with expressions in the view.
+## Data binding
+The data we attached to the $scope in our controller can be
+displayed in our view with expressions. An express will look
+like this: `{{ property }}` where property is the name of 
+the attribute we attached to our $scope.  In our example, to
+display the content of $scope.title, we would add the following
+to our html:
+
 ```html
 <h1>{{ title }}</h1>
 ```
 
-If the data is in an array:
+If we want to display data that is in an array we can use the
+`ng-repeat` directive to loop through the array and get each
+element. The syntax is `ng-repeat="item in array"` where array
+is the name of the array and item is a placeholder variable
+that represents the current element. To display the contents of
+our data array do the following:
 
 ```html
-<div ng-repeat="item in array">
-   <div>{{ item.value }}</div>
+<div ng-repeat="day in days">
+   <p>{{ day }}</p>
 </div>
+```
+
+We can bind the value of html controls to the model using the 
+`ng-model` directive.  
+
+```html
+<input ng-model="day">
 ```
 
 ## Directives
 
-Allow you to make resusable HTML components
+Angular also allows us to create our own directives.  We would 
+create a new directive when we want to make resusable HTML components. In this example 'directiveName' is the name we
+want to give the directive. It must be written in camel case.
+
 ```js
 var app = angular.module('myapp', []);
 
-app.directive('helloWorld', function() {
+app.directive('directiveName', function() {
   return {
       restrict: 'AE',
       replace: 'true',
-      templateUrl: 'js/directives/helloWorld.html'
+      templateUrl: 'js/directives/directiveName.html'
   };
 });
 ```
-restrict specifies how the directive is used in HTML
-A is for attribute
+restrict specifies how the directive is used in HTML. When using 
+the directive it must use all lowercase and each word should be
+separated with a hyphen. The `A` value of restrict means we can use our directive as an element's attribute.
 
 ```html
-<div hello-world></div>
+<div directive-name></div>
 ```
 
-E is for element
+The `E` value of restric means we can use our directive as an
+element.
 
 ```html
-<hello-world></hello-world>
+<directive-name></directive-name>
 ```
+
+These are other properties that can be set in the directive:
 
 **template** - specifies the HTML markup  
 **templateUrl** - the file path to the template code  

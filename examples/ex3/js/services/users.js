@@ -1,7 +1,6 @@
 //https://github.com/tastejs/todomvc/blob/gh-pages/examples/angularjs/js/services/todoStorage.js
-//https://scotch.io/tutorials/node-and-angular-to-do-app-controllers-and-services
 app.factory('Users', ['$http',function($http){
-	store = {
+	var store = {
 		data: [],
 		get: function() {
 			//why does Users.json have to be capitalized?
