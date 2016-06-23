@@ -49,13 +49,11 @@ var app = angular.module("myApp", []);
 
 app.controller('MainController', ['$scope',function($scope){
   $scope.title = "My App";
-  $scope.days = ["Monday", "Tuesay", "Wednesday", "Thursday", 
-  "Friday"];
 }]);
 ```
 
 This creates a controller named `'MainController'` and attaches
-the property title and days to the application $scope. To initialize the controller we use the `ng-controller` directive
+the property title to the application $scope. To initialize the controller we use the `ng-controller` directive
 in the view.
 
 ```html
@@ -78,10 +76,13 @@ If we want to display data that is in an array we can use the
 `ng-repeat` directive to loop through the array and get each
 element. The syntax is `ng-repeat="item in array"` where array
 is the name of the array and item is a placeholder variable
-that represents the current element. To display the contents of
-our data array do the following:
+that represents the current element. 
 
 ```html
+//in the controller
+$scope.days = ["Monday", "Tuesay", "Wednesday", "Thursday", "Friday"];
+
+//in the view
 <div ng-repeat="day in days">
    <p>{{ day }}</p>
 </div>
