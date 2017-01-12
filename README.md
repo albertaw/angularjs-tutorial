@@ -7,6 +7,54 @@ our view with our model, we can update our model with data bound
 to our view. 
 
 ## Getting started
+
+You can begin by scaffolding your project.  This is how you might
+organize your files for a simple project:
+
+```
+project/
+|-- cs/
+|
+|-- js/
+|   |-- controllers/
+|   |-- directives/
+|   |-- services/
+|   |-- vendor/
+|   |-- app.js
+|
+|-- views/
+|
+|__ index.html
+```
+
+The `app.js` file will be your entry point into your app that's 
+responsible for creating the module, setting up routes, and any
+other configurations.  The `index.html` file is the base file for 
+your single page application. This is where your different views
+will be included.  Here is an example file:
+
+```html
+<!Doctype html>
+<html>
+  <head>
+    <!-- META TAGS -->
+    <!-- STYLESHEETS -->
+    <!-- ANGULAR LIBRARIES -->
+  </head>
+  <body>
+    <div>
+     <!-- VIEW INJECTION -->
+      <ng-view></ng-view>
+    </div>
+    <!-- VENDOR JAVASCRIPT LIBRARIES -->
+    <!-- MODULES -->
+    <!-- CONTROLLERS -->
+    <!-- DIRECTIVES -->
+    <!-- SERVICES -->
+  </body>
+</html>
+```
+
 To use Angular you will need to include the script in the head 
 of the main html file for your app. You can [download](https://angularjs.org/) the file 
 to your project and link the script or add this script that is
