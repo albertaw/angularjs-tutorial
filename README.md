@@ -20,7 +20,7 @@ project/
 |   |-- directives/
 |   |-- services/
 |   |-- vendor/
-|   |-- app.js
+|   |__ app.js
 |
 |-- views/
 |
@@ -60,8 +60,8 @@ of the main html file for your app. You can [download](https://angularjs.org/) t
 to your project and link the script or add this script that is
 hosted on Google:
 
-```
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+```html
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
 ```
 
 The simplest way to start using Angular is to create a module, a controller, and bind the data to the view.
@@ -144,18 +144,31 @@ We can bind the value of html controls to the model using the
 ```
 
 ## Routing
-Lets you map routes to request handlers.
+Lets you map routes to request handlers. To implement routing
+in your app you will need to add the `ngRoute` module as a 
+dependency to your app.
 
 ```js
 var app = angular.module('myApp', ['ngRoute']);
+```
 
+Then you wil need to add the script to the head of your html file,
+below the Angular script.  You can use the following script:
+
+```html
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-route.js"></script>
+```
+
+Next, configure your routes:
+
+```js
 app.config(function($routeProvider){
   $routeProvider
   .when('/',{
     controller: 'MainController',
     templateUrl: 'views/main.html'
   })
-  .when('/:id',{
+  .when('/:param',{
     controller: 'UserController',
     templateUrl: 'views/user.html'
   })
@@ -164,7 +177,11 @@ app.config(function($routeProvider){
   });
 });
 ```
-In controller inject $routeParams as a dependency
+
+We can specify paramaters in our paths by using colon before 
+the parameter name.  In our example, `'/:param'`, param is the 
+name of our parameter. To access a parameter inside a controller 
+inject `$routeParams` as a dependency.
 
 ```js
 app.controller("UserController", function($scope, $routeParams, users){
