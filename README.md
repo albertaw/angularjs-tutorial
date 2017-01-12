@@ -95,6 +95,52 @@ We can bind the value of html controls to the model using the
 <input ng-model="day">
 ```
 
+## Routing
+Lets you map routes to request handlers.
+
+```js
+var app = angular.module('myApp', ['ngRoute']);
+
+app.config(function($routeProvider){
+  $routeProvider
+  .when('/',{
+    controller: 'MainController',
+    templateUrl: 'views/main.html'
+  })
+  .when('/:id',{
+    controller: 'UserController',
+    templateUrl: 'views/user.html'
+  })
+  .otherwise({
+    redirectTo: '/'
+  });
+});
+```
+In controller inject $routeParams as a dependency
+
+```js
+app.controller("UserController", function($scope, $routeParams, users){
+  users.success(function(data){
+    $scope.user = data[$routeParams.id];
+  });
+})
+```
+
+When you implement routing, you do not need to attach
+the controller to the view because the controller is already
+specified in the routes. In your main html page, include the ng-view directive where you want to inject your views.  When you request a route, for example the '\' route, main.html will be injected into ng-view and the code in the MainController will
+be executed.
+
+```html
+<body ng-app="myApp">
+  ...
+  <div class="main">
+    <ng-view></ng-view>
+  </div>
+  ...
+</body>
+```
+
 ## Directives
 
 Angular also allows us to create our own directives.  We would 
@@ -202,48 +248,3 @@ $http.delete('/url').then(successCallback, errorCallback);
 ```
 
 
-## Routing
-Lets you map routes to request handlers.
-
-```js
-var app = angular.module('myApp', ['ngRoute']);
-
-app.config(function($routeProvider){
-  $routeProvider
-  .when('/',{
-    controller: 'MainController',
-    templateUrl: 'views/main.html'
-  })
-  .when('/:id',{
-    controller: 'UserController',
-    templateUrl: 'views/user.html'
-  })
-  .otherwise({
-    redirectTo: '/'
-  });
-});
-```
-In controller inject $routeParams as a dependency
-
-```js
-app.controller("UserController", function($scope, $routeParams, users){
-  users.success(function(data){
-    $scope.user = data[$routeParams.id];
-  });
-})
-```
-
-When you implement routing, you do not need to attach
-the controller to the view because the controller is already
-specified in the routes. In your main html page, include the ng-view directive where you want to inject your views.  When you request a route, for example the '\' route, main.html will be injected into ng-view and the code in the MainController will
-be executed.
-
-```html
-<body ng-app="myApp">
-  ...
-  <div class="main">
-    <ng-view></ng-view>
-  </div>
-  ...
-</body>
-```
