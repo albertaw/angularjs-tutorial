@@ -312,4 +312,8 @@ $http.put('/url', data).then(successCallback, errorCallback);
 $http.delete('/url').then(successCallback, errorCallback);
 ```
 
+## Resources
 
+- [Codecademy AngularJS tutorial](https://www.codecademy.com/learn/learn-angularjs)
+- [Angular style guide](https://github.com/johnpapa/angular-styleguide)
+- [Protractor: end to end testing for AngularJS](http://www.protractortest.org)
