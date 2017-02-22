@@ -453,8 +453,4 @@ protractor conf.js
 - [BrowserStack cross-browser testing tool](https://www.browserstack.com)
 - [SauceLabs automated browser testing](http://saucelabs.com)
 
-## Resources
 
-- [Codecademy AngularJS tutorial](https://www.codecademy.com/learn/learn-angularjs)
-- [Angular style guide](https://github.com/johnpapa/angular-styleguide)
-- [Protractor: end to end testing for AngularJS](http://www.protractortest.org)
