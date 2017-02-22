@@ -63,7 +63,7 @@ angular.module("app", []);
 The `[]` is used to inject dependencies into your app, such as third party libraries, other modules or services.  Add `app.js` to your index file.  In the view we include the module in our html using the ng-app directive.  A directive is an html attribute that adds functionality to elements. Angular directives will begin with `ng-`. This following example initializes our Angular application.
 
 ```html
-<html ng-app=“app”>
+<html ng-app="app">
 ```
 
 ### Controllers
@@ -75,14 +75,14 @@ The glue that connects the model to our view is the controller. The controller c
 angular.module("app").controller('BookController', BookController);
 
 function BookController() {
-  this.appTitle = “My Book Store”;
+  this.appTitle = "My Book Store";
   this.books = [
-    {author: “Charles Dickens”, title: “Oliver Twist”, isbn: 1234},
-    {author: “Charles Dickens”, title: “Tale of Two Cities”, isbn: 5678}
+    {author: "Charles Dickens", title: "Oliver Twist", isbn: 1234},
+    {author: "Charles Dickens", title: "Tale of Two Cities", isbn: 5678}
   ];
   this.addBook = function(book) {
-this.books.push(book)
-};
+    this.books.push(book)
+  };
 }
 ```
 
@@ -104,17 +104,17 @@ The curly braces are used to make expressions.  An expression is something that 
 ```html
 <!-- index.html -->
 <body ng-controller="BookController as bookCtrl">
-<div ng-repeat="book in bookCtrl.books">
+  <div ng-repeat="book in bookCtrl.books">
     <div>{{ book.author }}</div>
-<div>{{ book.title }}</div>
-</div>
+    <div>{{ book.title }}</div>
+  </div>
 </body>
 ```
 
 If we want to link data in our view to our controller, we can use the `ng-model` directive.  This can be used on input fields, select elements, or any other form element.  Example:
 
 ```html
-<input type=“text” ng-model="bookCtrl.appTitle">
+<input type="text" ng-model="bookCtrl.appTitle">
 ```
 
 When data is entered into this input field, it will update the data in our controller for our appTitle property. 
@@ -126,7 +126,7 @@ When we want to make our own reusable HTML components, or if we need to manipula
 ```js
 //book-info.directive.js
 
-angular.module(‘app').directive('bookInfo', bookInfo);
+angular.module('app').directive('bookInfo', bookInfo);
 
 function bookInfo() {
 var directive = {
@@ -167,9 +167,9 @@ In the main view  we can replace the html that shows our books with this directi
 
 ```html
 <body ng-controller="BookController as bookCtrl">
-<div ng-repeat="book in bookCtrl.books">
-    <book-info data=”book”></book-info>
-</div>
+  <div ng-repeat="book in bookCtrl.books">
+      <book-info data="book"></book-info>
+  </div>
 </body>
 ```
 
@@ -196,9 +196,9 @@ angular.module(‘app’).config(config);
 function config($routeProvider){
 $routeProvider
    .when('/books', {
-    templateUrl: ‘/main.html’,
-        controller: 'BookController',
-    controllerAs: ‘bookCtrl’
+    templateUrl: '/main.html',
+    controller: 'BookController',
+    controllerAs: 'bookCtrl'
   });
 };
 ```
@@ -209,12 +209,12 @@ When you implement routing, you do not need to attach the controller to the view
 <!-- index.html -->
 
 <!Doctype html>
-<html ng-app=”app”>
-<head>
-</head>
-<body>
-        <ng-view></ng-view>
-        </body>
+<html ng-app="app">
+  <head>
+  </head>
+  <body>
+    <ng-view></ng-view>
+  </body>
 </html>
 ```
 
@@ -223,7 +223,7 @@ When you implement routing, you do not need to attach the controller to the view
 
 <h1>{{ bookCtrl.appTitle }}</h1>
 <div ng-repeat="book in bookCtrl.books">
-    <book-info data=”book”></book-info>
+    <book-info data="book"></book-info>
 </div>
 ```
 
@@ -288,14 +288,14 @@ var bookCtrl;
     //load the module
     module('app');
 
-    //locad the controller
+    //load the controller
     inject(function ($controller) {
           bookCtrl = $controller('BookController');
       });
   });
 
-  it(‘should have the title “My Book Store”’, function() {
-    expect(bookCtrl.appTitle).toEqual(‘My Book Store’); 
+  it('should have the title "My Book Store"', function() {
+    expect(bookCtrl.appTitle).toEqual('My Book Store'); 
   });
   
 });
@@ -367,33 +367,36 @@ The webdriver-manager creates a Selenium server.  The purpose of this server is 
 
 By default Protractor uses Jasmine.  At the beginning of your tests, you will need to open the webpage you want to test:
 ```js
-browser.get(‘url’);
+browser.get('url');
 ```
 
 To do your tests you will need to find the element using a locator and do something with it using an action. Your jasmine test will have this format: `expect(locator.action()).matcher()`
 Locators:
 
 ```js
-//<div ng-model=’myModel’></div>
+//<div ng-model="myModel"></div>
 element(by.model(‘myModel’))
 
 //<div>{{ myExpression }}</div>
-element(by.binding(‘myExpression’))
+element(by.binding('myExpression'))
 
 //find by id
-element(by.id(‘myId’))
+element(by.id('myId'))
 
 //find by css selector
-element(by.css(‘myClass’))
+element(by.css('myClass'))
+
+//find by name
+element(by.name('myName'))
  ```
 Actions:
 
 ```js
-locator.sendKeys(‘example’)
+locator.sendKeys('example')
 locator.click()
 locator.getText()
 locator.clear()
-locator.getAttribute(‘value’)
+locator.getAttribute('value')
 locator.isDisplayed()
 
 //get number of elements.
