@@ -242,14 +242,14 @@ function bookService() {
     create: createBook,
     update: updateBook,
     delete: deleteBook
-};
+  };
 
-return service;
+  return service;
 
-function getBook() {...}
-function createBook() {...}
-function updateBook() {...}
-function deleteBook() {...}
+  function getBook() {...}
+  function createBook() {...}
+  function updateBook() {...}
+  function deleteBook() {...}
 }
 ```
 in the controller:
@@ -269,9 +269,9 @@ function BookController(bookService) {...}
 We can use a testing framework like Jasmine to write our unit tests and a test runner like Karma to automate our tests.  You will also need node to install Jasmine and Karma to your computer.  First, download the node installer from here: [https://nodejs.org].  Double click the file and follow the instructions in the installation prompt.  Confirm node installed successfully by typing the command `node -v` from the terminal.  If all is well, you will see the version number printed out.  Next install Jasmine:
 
 ```bash 
-//install globally
+install globally
 $ npm install -g jasmine
-//install locally
+install locally
 $ npm install jasmine
 ```
 
@@ -333,11 +333,11 @@ Other methods you can use include:
 Next, we will set up our test runner Karma. 
 
 ```bash
-//install globally
+install globally
 $ npm install -g karma
-//install locally
+install locally
 $ npm install karma
-//create a configuration file named `karma.conf.js`
+create a configuration file named `karma.conf.js`
 $ karma init karma.conf.js
 ```
 
