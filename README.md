@@ -6,10 +6,10 @@ Angular is a framework for organizing web apps.  It uses a MVVM (Model-View-View
 Table of Contents
 ------------------------
  
-- [Getting Started](#Getting-Started)
-- [Controllers](#Controllers)
-- [Testing with Jasmine and Karma](#Testing-with-Jasmine-and-Karma)
-- [Unit Testing Controllers](#Unit-Testing-Controllers)
+- [Getting Started](#getting-started)
+- [Controllers](#controllers)
+- [Testing with Jasmine and Karma](#testing-with-jasmine-and-karma)
+- [Unit Testing Controllers](#unit-testing-controllers)
 - [Data Binding](#Data-Binding)
 - [Filters](#Filters)
 - [Unit Testing Filters](#Unit-Testing-Filters)
