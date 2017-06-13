@@ -25,47 +25,72 @@ Table of Contents
 Getting started
 --------------------
 
-######[Back to top](#table-of-contents)
+**[Back to top](#table-of-contents)**
  
 Controllers
 ---------------
+
+**[Back to top](#table-of-contents)**
  
 Testing with Jasmine and Karma
 --------------------------------------------
+
+**[Back to top](#table-of-contents)**
  
 Unit Testing Controllers
 --------------------------------
+
+**[Back to top](#table-of-contents)**
  
 Data Binding
 -----------------
- 
+
+**[Back to top](#table-of-contents)** 
  
 Filters
 ---------
+
+**[Back to top](#table-of-contents)**
  
 Unit Testing Filters
 -------------------------
+
+**[Back to top](#table-of-contents)**
  
 Services and factories
 ------------------------------
+
+**[Back to top](#table-of-contents)**
  
 Unit Testing Services
 -----------------------------
+
+**[Back to top](#table-of-contents)**
  
 Directives
 --------------
+
+**[Back to top](#table-of-contents)**
  
 Unit Testing Directives
 -------------------------------
+
+**[Back to top](#table-of-contents)**
  
 Automating Tests
 ------------------------
+
+**[Back to top](#table-of-contents)**
  
 Routing
 -----------
+
+**[Back to top](#table-of-contents)**
  
 Automating Browser Tests with Protractor
 --------------------------------------------------------
+
+**[Back to top](#table-of-contents)**
  
 Resources
 ---------------
