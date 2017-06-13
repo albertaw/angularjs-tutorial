@@ -24,6 +24,8 @@ Table of Contents
  
 Getting started
 --------------------
+
+######[Back to top](#table-of-contents)
  
 Controllers
 ---------------
