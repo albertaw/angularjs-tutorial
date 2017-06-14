@@ -103,6 +103,7 @@ Resources
 - [BrowserStack cross-browser testing tool](https://www.browserstack.com)
 - [SauceLabs automated browser testing](http://saucelabs.com)
  
+ **[Back to top](#table-of-contents)**
  
  
  
