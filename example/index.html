@@ -2,19 +2,22 @@
 <html ng-app="app">
   <head>
     <!-- meta tags -->
+    <meta charset="utf-8">
     <!-- stylesheets -->
     <!-- angular libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
   </head>
-  <body>
-    <div ng-init="greeting='hello world'">
-      <h1>{{ greeting }}</h1>
+  <body ng-controller="BookController as bookCtrl">
+    <div ng-repeat="book in bookCtrl.books">
+      <h4>{{ book.title }} by {{ book.author }}<h4>
     </div>
     <!-- vendor libraries-->
     <!-- modules -->
     <script src="app/app.module.js"></script>
+    <script src="app/books/books.module.js"></script>
     <!-- routes -->
     <!-- controllers -->
+    <script src="app/books/books.controller.js"></script>
     <!-- directives -->
     <!-- services -->
   </body>

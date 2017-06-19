@@ -115,6 +115,58 @@ Now, when we refresh our browser we will see the words “hello world.”
  
 Controllers
 ---------------
+
+The glue that connects the model to our view is the controller. The controller can be thought of as a class for your application. It will hold the logic to control your data. For our online bookstore we want to show our users what books we have.  We will keep this information in a books module.  Inside our app folder create a folder named `books` with a file named `books.module.js`.  Define the books module in this file.
+ 
+```javascript
+//books.module.js
+ 
+angular.module(“app.books”, []);
+```
+ 
+Inject the books module as a dependency of the app module.
+ 
+```javascript
+//app.module.js
+ 
+angular.module("app", ["app.books"]);
+```
+ 
+Include the script in your index file.  Next create a file named `books.controller.js` in your books directory.  Our controller will just contain a list of books.
+ 
+```javascript
+//books.controller.js
+ 
+(function() {
+angular
+  .module("app.books")
+  .controller('BookController', BookController);
+ 
+function BookController() {
+  this.books = [
+    {title: "Oliver Twist", author: "Charles Dickens", isbn: 1234},
+    {title: "Tale of Two Cities", author: "Charles Dickens", isbn: 5678}
+  ];
+}
+})();
+```
+ 
+Include the book controller in your index file. Notice that the code is wrapped in an immediately invoked function expression (IIFE).  This is done to ensure there are no name collisions with the variablest we create.  Next, inside our view we will loop through the books array and display each book’s title and author. Add the controller to the view:
+ 
+```html
+<body ng-controller="BookController as bookCtrl">
+```
+ 
+ This setup is known as controllerAs syntax. The format is *controller_name* as *object_name*.  This allows us to use our book controller like a javascript object.  To loop through the books we will need the `ng-repeat` directive. Remove the old directive inside our `div` and the expression.  Replace it with this:
+ 
+```html
+<div ng-repeat="book in bookCtrl.books">
+   <h4>{{ book.title }} by {{ book.author }}<h4>
+ </div>
+```
+ 
+When we refresh our web browser, we should see **Oliver Twist by Charles Dickens** and **Tale of Two Cities by Charles Dickens**.
+
  
 **[Back to top](#table-of-contents)**
  
