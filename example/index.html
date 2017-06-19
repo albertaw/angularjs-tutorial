@@ -10,6 +10,7 @@
   <body ng-controller="BookController as bookCtrl">
     <div ng-repeat="book in bookCtrl.books">
       <h4>{{ book.title }} by {{ book.author }}<h4>
+      <input type="text" ng-model="book.title">
     </div>
     <!-- vendor libraries-->
     <!-- modules -->

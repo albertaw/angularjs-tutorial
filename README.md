@@ -9,8 +9,6 @@ Table of Contents
 - [Getting Started](#getting-started)
 - [Controllers](#controllers)
 - [Testing with Jasmine and Karma](#testing-with-jasmine-and-karma)
-- [Unit Testing Controllers](#unit-testing-controllers)
-- [Data Binding](#data-binding)
 - [Filters](#filters)
 - [Unit Testing Filters](#unit-testing-filters)
 - [Services and Factories](#services-and-factories)
@@ -25,7 +23,7 @@ Table of Contents
 Getting started
 --------------------
 
-Our first task will be to build a "hello world" application. It will contain a single web page that displays the text "hello world."  The purpose is to get our project set up so that we can continue building upon it.  This is how we will organize our files for our project:
+Our first task will be to build a "hello world" application. It will contain a single web page that displays the text "hello world." The purpose is to get our project set up so that we can continue building upon it.  This is how we will organize our files for our project:
  
 ```
 project/
@@ -103,7 +101,7 @@ This creates a variable for us named "greeting" that has the value "hello world.
 {{ greeting }}
 ```
  
-Now, when we refresh our browser we will see the words “hello world.”
+ An expression is something that will result in a value. When we refresh our browser we will see the value of `greeting` which is "hello world."
 
  
 **[Back to top](#table-of-contents)**
@@ -116,7 +114,7 @@ The glue that connects the model to our view is the controller. The controller c
 ```javascript
 //books.module.js
  
-angular.module(“app.books”, []);
+angular.module("app.books", []);
 ```
  
 Inject the books module as a dependency of the app module.
@@ -146,13 +144,13 @@ function BookController() {
 })();
 ```
  
-Include the book controller in your index file. Notice that the code is wrapped in an immediately invoked function expression (IIFE).  This is done to ensure there are no name collisions with the variablest we create.  Next, inside our view we will loop through the books array and display each book’s title and author. Add the controller to the view:
+Include the book controller in your index file. Notice that the code is wrapped in an immediately invoked function expression (IIFE).  This is done to ensure there are no name collisions with the variables we create.  Next, inside our view we will loop through the books array and display each book's title and author. Add the controller to the view:
  
 ```html
 <body ng-controller="BookController as bookCtrl">
 ```
  
- This setup is known as controllerAs syntax. The format is *controller_name* as *object_name*.  This allows us to use our book controller like a javascript object.  To loop through the books we will need the `ng-repeat` directive. Remove the old directive inside our `div` and the expression.  Replace it with this:
+ This setup is known as controllerAs syntax.  The format is *controller_name* as *object_name*.  This allows us to use our book controller like a javascript object.  To loop through the books we will need the `ng-repeat` directive. The syntax is `ng-repeat="item in list"` where `list` is the name of the array and `item` is a variable that represents the current element. Remove the old directive inside our `div` and the expression.  Replace it with this:
  
 ```html
 <div ng-repeat="book in bookCtrl.books">
@@ -161,7 +159,15 @@ Include the book controller in your index file. Notice that the code is wrapped 
 ```
  
 When we refresh our web browser, we should see **Oliver Twist by Charles Dickens** and **Tale of Two Cities by Charles Dickens**.
-
+ 
+What makes Angular special is a feature called two-way binding. This means that changes to our model will update our view and changes made in our view can update our model.  This is very useful if you are building an application with a rich user interface. If we want to link data in our view to our controller, we can use the `ng-model` directive.  This can be used on input fields, select elements, or any other form element. Add the following element inside your `div`:
+ 
+```html
+<input type="text" ng-model="book.title">
+```
+ 
+An input field should show beneath each book. When data is entered into this input field, it will change the value of its respective book’s title. 
+ 
  
 **[Back to top](#table-of-contents)**
  
@@ -172,7 +178,7 @@ Thus far, we have been testing our code by refreshing our browser.  This is ok, 
  
 Create a file named books.controller.spec.js and save it in the books folder. Add the following to the file:
  
-```js
+```javascript
 //books.controller.spec.js
  
 describe('Book Controller', function() {
@@ -196,7 +202,13 @@ describe('Book Controller', function() {
 });
 ```
  
-The `describe` block groups related tests together.  It contains one or more it blocks.  The `it` block is the test or spec.  An it block contains one or more expectations. The `expect` function is an assertion that is either true or false.  It takes `expect(actual_value).matcherFn(expected_value)` where matcherFn is a matcher function that specifies what we are testing.  Here is a list of matcher functions:
+The `describe` block groups related tests together.  It contains one or more it blocks.  The `it` block is the test or spec.  An it block contains one or more expectations. The `expect` function is an assertion that is either true or false.  Expectations take the form:
+
+ ```javascript
+ expect(actual_value).matcherFn(expected_value)
+ ``` 
+
+ Where matcherFn is a matcher function that specifies what we are testing. Here is a list of matcher functions:
  
 - expect(x).toBe(obj)  
 - expect(x).toEqual(val)
@@ -255,17 +267,7 @@ $ karma start
  
 You should see a browser open up and in the terminal window a green “SUCCESS”.
  
- 
-**[Back to top](#table-of-contents)**
- 
-Unit Testing Controllers
---------------------------------
- 
-**[Back to top](#table-of-contents)**
- 
-Data Binding
------------------
- 
+
 **[Back to top](#table-of-contents)** 
  
 Filters
