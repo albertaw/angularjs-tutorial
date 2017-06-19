@@ -66,7 +66,7 @@ This directory structure groups our code by feature.  This setup is preferable b
   </head>
   <body>
     <div>
-      <!-- view injection →
+      <!-- view injection -->
     </div>
     <!-- vendor libraries-->
     <!-- modules -->
