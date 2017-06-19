@@ -78,12 +78,7 @@ This directory structure groups our code by feature.  This setup is preferable b
 </html>
 ```
  
-To get started, create an `index.html` file and include the Angular library in the head with this script:
- 
-```html
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
-```
-You can also [download](https://angularjs.org/) the Angular library to your project.  Next, create an `app` folder with an `app.module.js` file inside.  This file will define our Angular app and be responsible for tying together all other modules. A module is a container for our application code. It is a good practice to define modules in a file of their own.  In the following example a module named `app` is created. 
+To get started, create an `index.html` file. Create a lib folder and save a copy of the Angular library to it.  You can download Angular from here: [https://angularjs.org/]. Include the script in the head of your file.  Next, create an `app` folder with an `app.module.js` file inside.  This file will define our Angular app and be responsible for tying together all other modules. A module is a container for our application code. It is a good practice to define modules in a file of their own.  In the following example a module named `app` is created. 
  
 ```javascript
 //app.module.js
@@ -172,6 +167,94 @@ When we refresh our web browser, we should see **Oliver Twist by Charles Dickens
  
 Testing with Jasmine and Karma
 --------------------------------------------
+ 
+Thus far, we have been testing our code by refreshing our browser.  This is ok, but we also need to unit test our code.  We can use a testing framework like Jasmine to write our unit tests and a test runner like Karma.  Using Karma allows us to run our tests from the command prompt, which in my opinion is more convenient.  
+ 
+Create a file named books.controller.spec.js and save it in the books folder. Add the following to the file:
+ 
+```js
+//books.controller.spec.js
+ 
+describe('Book Controller', function() {
+ 
+  let bookCtrl;
+ 
+  beforeEach(function () {
+    //load the module
+    module('app.books');
+ 
+    //load the controller
+    inject(function ($controller) {
+          bookCtrl = $controller('BookController');
+      });
+  });
+ 
+  it('should have two books', function() {
+    expect(bookCtrl.books.length).toEqual(2); 
+  });
+  
+});
+```
+ 
+The `describe` block groups related tests together.  It contains one or more it blocks.  The `it` block is the test or spec.  An it block contains one or more expectations. The `expect` function is an assertion that is either true or false.  It takes `expect(actual_value).matcherFn(expected_value)` where matcherFn is a matcher function that specifies what we are testing.  Here is a list of matcher functions:
+ 
+- expect(x).toBe(obj)  
+- expect(x).toEqual(val)
+- expect(x).toMatch(regex)
+- expect(x).toBeDefined() 
+- expect(x).toBeUndefined() 
+- expect(x).toBeNull()
+- expect(x).toBeTruthy() 
+- expect(x).toBeFalsy()
+- expect(x).toContain(y)
+- expect(x).toBeLessThan(y)
+- expect(x).toBeGreaterThan(y)
+- expect(x).toBeCloseTo(min, max)
+- expect(x).toThrow(y)
+- expect(x).toThrowError()
+ 
+Any of the matcher functions can be inverted by adding `not` before it like this:  
+- expect(x).not.toBe(obj)
+- expect(x).not.toEqual(val)
+- expect(x).not.toBeNull()
+ 
+Other methods you can use include:
+- beforeEach(callback) - called before each it block
+- afterEach(callback) - called after each it block
+- beforeAll(callback) - called before all it blocks
+- afterAll(callback) - called after all it blocks
+ 
+Next, we will use the node package manager to install both Jasmine and Karma to our computer. First, download the node installer from here: [https://nodejs.org].  Double click the file and follow the instructions in the installation prompt.  Confirm node installed successfully by typing the command `node -v` from the terminal.  If all is well, you will see the version number printed out.  Now install Jasmine:
+ 
+```bash 
+install jasmine globally
+$ npm install -g jasmine
+install jasmine-core globally
+$ npm install -g jasmine-core
+```
+ 
+Install Karma:
+ 
+```bash
+install karma globally
+$ npm install -g karma
+```
+ 
+Next, we will set up our test runner Karma. 
+ 
+```bash
+$ karma init 
+```
+ 
+When you are prompted to add the files you will give the file paths for angular, angular-mocks, the books module, the books controller, and the books test file.  
+ 
+Run the tests:
+```bash
+$ karma start 
+```
+ 
+You should see a browser open up and in the terminal window a green “SUCCESS”.
+ 
  
 **[Back to top](#table-of-contents)**
  
