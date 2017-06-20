@@ -9,8 +9,6 @@ Table of Contents
 - [Getting Started](#getting-started)
 - [Controllers](#controllers)
 - [Testing with Jasmine and Karma](#testing-with-jasmine-and-karma)
-- [Filters](#filters)
-- [Unit Testing Filters](#unit-testing-filters)
 - [Services and Factories](#services-and-factories)
 - [Unit Testing Services](#unit-testing-services)
 - [Directives](#directives)
@@ -270,19 +268,95 @@ You should see a browser open up and in the terminal window a green “SUCCESS�
 
 **[Back to top](#table-of-contents)** 
  
-Filters
----------
- 
-**[Back to top](#table-of-contents)**
- 
-Unit Testing Filters
--------------------------
- 
-**[Back to top](#table-of-contents)**
- 
 Services and factories
 ------------------------------
+
+Services and factories let you share code across your app. The benefit is you can use functions independent of any controller.  The difference between a service and a factory is how they are implemented.  A service uses the `this` keyword to define public properties and a factory returns an object. An example service is angular’s $http service. Currently, we are storing our books inside of an array in our controller. Instead, we will use a service to get the list of books from a json file.  This is to mimic getting data from an API. 
  
+Create a file named books.json and save it to the `books` folder.
+ 
+```
+//books.json
+ 
+[
+  {
+    "title": "Oliver Twist",
+    "author": "Charles Dickens",
+    "isbn": 1234
+  },
+  {
+    "title": "Tale of Two Cities",
+    "author": "Charles Dickens",
+    "isbn": 5678
+  }
+]
+```
+ 
+Create a file named `books.service.js` and save it to the `books` folder.  Put the following in the file:
+ 
+```js
+//books.service.js
+ 
+(function(){
+ 
+  angular
+    .module('app.books')
+    .factory('Books', bookService);
+   
+  bookService.$inject = ['$http'];
+ 
+  function bookService($http) {
+    let service = {
+      get: getBook,
+      create: createBook,
+      update: updateBook,
+      del: deleteBook
+    };
+   
+    return service;
+   
+    function getBook() {
+      return $http.get('/app/books/books.json');
+    }
+ 
+    function createBook() { }
+    function updateBook() { }
+    function deleteBook() { }
+  }
+ 
+})();
+ 
+ 
+```
+ 
+Include the file in your `index`   page.  Change the controller to look like this:
+ 
+```js
+(function() {
+ 
+  angular
+    .module('app.books')
+    .controller('BookController', BookController);
+   
+  BookController.$inject = ['Books'];
+ 
+  function BookController(Books){
+    let vm = this;
+ 
+    Books.get().then(function(response) {
+      vm.books = response.data;
+    }, function(error){
+      console.log(error);
+    });
+ 
+  }
+ 
+})();
+```
+
+In our controller we used `BookController.$inject = ['Books']` so that we could make our Books service available for use in the controller.  Then we passed `Books` inside of the `BookController` function  so that we could access its methods.   Notice how we cached the value of `this` by assigning it to a variable.  This ensures that `this` refers to our Book controller. 
+
+
 **[Back to top](#table-of-contents)**
  
 Unit Testing Services
