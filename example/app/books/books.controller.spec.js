@@ -1,19 +1,34 @@
 describe('Book Controller', function() {
  
   let bookCtrl;
- 
-  beforeEach(function () {
+  let bookService;
+  let books;
+
+  beforeEach(function (done) {
     //load the module
     module('app.books');
  
     //load the controller
     inject(function ($controller) {
-          bookCtrl = $controller('BookController');
-      });
+      bookCtrl = $controller('BookController');
+    });
+
+    //load the service
+    inject(function(_Books_) {
+      bookService = _Books_;
+    });
+
+    
+    done();
   });
  
-  it('should have two books', function() {
-    expect(bookCtrl.books.length).toEqual(2); 
+  it('should have two books', function(done) {
+    //bookService.get().then(function(response) {
+      //books = response.data;
+      expect(bookCtrl().books.length).toEqual(2); 
+    //});
+    
+    done();
   });
   
 });

@@ -8,12 +8,8 @@ Table of Contents
  
 - [Getting Started](#getting-started)
 - [Controllers](#controllers)
-- [Testing with Jasmine and Karma](#testing-with-jasmine-and-karma)
 - [Services and Factories](#services-and-factories)
-- [Unit Testing Services](#unit-testing-services)
 - [Directives](#directives)
-- [Unit Testing Directives](#unit-testing-directives)
-- [Automating Tests](#automating-tests) 
 - [Routing](#routing)
 - [Automating Browser Tests with Protractor](#automating-browser-tests-with-protractor)
 - [Resources](#resources)
@@ -129,16 +125,16 @@ Include the script in your index file.  Next create a file named `books.controll
 //books.controller.js
  
 (function() {
-angular
-  .module("app.books")
-  .controller('BookController', BookController);
- 
-function BookController() {
-  this.books = [
-    {title: "Oliver Twist", author: "Charles Dickens", isbn: 1234},
-    {title: "Tale of Two Cities", author: "Charles Dickens", isbn: 5678}
-  ];
-}
+  angular
+    .module("app.books")
+    .controller('BookController', BookController);
+   
+  function BookController() {
+    this.books = [
+      {title: "Oliver Twist", author: "Charles Dickens", isbn: 1234},
+      {title: "Tale of Two Cities", author: "Charles Dickens", isbn: 5678}
+    ];
+  }
 })();
 ```
  
@@ -169,104 +165,6 @@ An input field should show beneath each book. When data is entered into this inp
  
 **[Back to top](#table-of-contents)**
  
-Testing with Jasmine and Karma
---------------------------------------------
- 
-Thus far, we have been testing our code by refreshing our browser.  This is ok, but we also need to unit test our code.  We can use a testing framework like Jasmine to write our unit tests and a test runner like Karma.  Using Karma allows us to run our tests from the command prompt, which in my opinion is more convenient.  
- 
-Create a file named books.controller.spec.js and save it in the books folder. Add the following to the file:
- 
-```javascript
-//books.controller.spec.js
- 
-describe('Book Controller', function() {
- 
-  let bookCtrl;
- 
-  beforeEach(function () {
-    //load the module
-    module('app.books');
- 
-    //load the controller
-    inject(function ($controller) {
-          bookCtrl = $controller('BookController');
-      });
-  });
- 
-  it('should have two books', function() {
-    expect(bookCtrl.books.length).toEqual(2); 
-  });
-  
-});
-```
- 
-The `describe` block groups related tests together.  It contains one or more it blocks.  The `it` block is the test or spec.  An it block contains one or more expectations. The `expect` function is an assertion that is either true or false.  Expectations take the form:
-
- ```javascript
- expect(actual_value).matcherFn(expected_value)
- ``` 
-
- Where matcherFn is a matcher function that specifies what we are testing. Here is a list of matcher functions:
- 
-- expect(x).toBe(obj)  
-- expect(x).toEqual(val)
-- expect(x).toMatch(regex)
-- expect(x).toBeDefined() 
-- expect(x).toBeUndefined() 
-- expect(x).toBeNull()
-- expect(x).toBeTruthy() 
-- expect(x).toBeFalsy()
-- expect(x).toContain(y)
-- expect(x).toBeLessThan(y)
-- expect(x).toBeGreaterThan(y)
-- expect(x).toBeCloseTo(min, max)
-- expect(x).toThrow(y)
-- expect(x).toThrowError()
- 
-Any of the matcher functions can be inverted by adding `not` before it like this:  
-- expect(x).not.toBe(obj)
-- expect(x).not.toEqual(val)
-- expect(x).not.toBeNull()
- 
-Other methods you can use include:
-- beforeEach(callback) - called before each it block
-- afterEach(callback) - called after each it block
-- beforeAll(callback) - called before all it blocks
-- afterAll(callback) - called after all it blocks
- 
-Next, we will use the node package manager to install both Jasmine and Karma to our computer. First, download the node installer from here: [https://nodejs.org].  Double click the file and follow the instructions in the installation prompt.  Confirm node installed successfully by typing the command `node -v` from the terminal.  If all is well, you will see the version number printed out.  Now install Jasmine:
- 
-```bash 
-install jasmine globally
-$ npm install -g jasmine
-install jasmine-core globally
-$ npm install -g jasmine-core
-```
- 
-Install Karma:
- 
-```bash
-install karma globally
-$ npm install -g karma
-```
- 
-Next, we will set up our test runner Karma. 
- 
-```bash
-$ karma init 
-```
- 
-When you are prompted to add the files you will give the file paths for angular, angular-mocks, the books module, the books controller, and the books test file.  
- 
-Run the tests:
-```bash
-$ karma start 
-```
- 
-You should see a browser open up and in the terminal window a green “SUCCESS”.
- 
-
-**[Back to top](#table-of-contents)** 
  
 Services and factories
 ------------------------------
@@ -298,7 +196,6 @@ Create a file named `books.service.js` and save it to the `books` folder.  Put t
 //books.service.js
  
 (function(){
- 
   angular
     .module('app.books')
     .factory('Books', bookService);
@@ -323,17 +220,13 @@ Create a file named `books.service.js` and save it to the `books` folder.  Put t
     function updateBook() { }
     function deleteBook() { }
   }
- 
 })();
- 
- 
 ```
  
 Include the file in your `index`   page.  Change the controller to look like this:
  
 ```js
 (function() {
- 
   angular
     .module('app.books')
     .controller('BookController', BookController);
@@ -350,7 +243,6 @@ Include the file in your `index`   page.  Change the controller to look like thi
     });
  
   }
- 
 })();
 ```
 
@@ -359,18 +251,9 @@ In our controller we used `BookController.$inject = ['Books']` so that we could 
 
 **[Back to top](#table-of-contents)**
  
-Unit Testing Services
------------------------------
- 
-**[Back to top](#table-of-contents)**
  
 Directives
 --------------
- 
-**[Back to top](#table-of-contents)**
- 
-Unit Testing Directives
--------------------------------
  
 **[Back to top](#table-of-contents)**
  

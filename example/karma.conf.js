@@ -19,7 +19,9 @@ module.exports = function(config) {
       'lib/angular-mocks.js',
       'app/books/books.module.js',
       'app/books/books.controller.js',
+      'app/books/books.service.js',
       'app/books/books.controller.spec.js',
+      'app/books/books.service.spec.js'
     ],
 
 
