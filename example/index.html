@@ -1,0 +1,28 @@
+<!Doctype html>
+<html ng-app="app">
+  <head>
+    <!-- meta tags -->
+    <meta charset="utf-8">
+    <!-- stylesheets -->
+    <!-- angular libraries -->
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/angular-route.min.js"></script>
+  </head>
+  <body>
+    <div>
+      <ng-view></ng-view>
+    </div>
+    <!-- vendor libraries-->
+    <!-- modules -->
+    <script src="app/app.module.js"></script>
+    <script src="app/books/books.module.js"></script>
+    <!-- routes -->
+    <script src="app/books/books.routes.js"></script>
+    <!-- controllers -->
+    <script src="app/books/books.controller.js"></script>
+    <!-- directives -->
+    <script src="app/books/book-info.directive.js"></script>
+    <!-- services -->
+    <script src="app/books/books.service.js"></script>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+<h2>Books</h2>
+<div ng-repeat="book in bookCtrl.books">
+  <book-info data="book"></book-info>
+  <input type="text" ng-model="book.title">
+</div>
