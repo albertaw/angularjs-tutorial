@@ -11,7 +11,7 @@ Table of Contents
 - [Services and Factories](#services-and-factories)
 - [Routing](#routing)
 - [Directives](#directives)
-- [Automating Browser Tests with Protractor](#automating-browser-tests-with-protractor)
+- [Review](#review)
 - [Resources](#resources)
  
 Getting started
@@ -449,9 +449,21 @@ Do the same for our book detail view:
 
 **[Back to top](#table-of-contents)**
 
- 
-Automating Browser Tests with Protractor
+Review
 --------------------------------------------------------
+
+Controllers interact with our data and render it to our view.  We created a book controller that was responsible for managing a list of books and individual books. To get the book data we used a service.  Services aren't tied to any controller.  Therefore, they can be used in multiple controllers for a particular module.  To use a service, you inject it as a dependency inside the controller.  
+
+Another feature of Angular is the ability to create a single page application.  Instead having multiple html pages, we use one base html page and inject each view into it.  To achieve this, we configure our routes with use of the `ngRoute` module.  Each route will have a path that is connected to a template and a controller.  Lastly, we dealt with directives whose purpose is to provide us with reusable UI components in keeping with the DRY principle.
+ 
+For further learning, you should continue building out the app.  Here are some suggestions:
+ 
+1. Add the functionality to create a book.
+2. Add the functionality to delete a book.
+3. Add the functionality to update a book.
+4. Create a route for /authors which lists all authors and their books.
+5. Create a route for /authors/:authorId which shows the detail for an individual author.
+ 
  
 **[Back to top](#table-of-contents)**
  
