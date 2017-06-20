@@ -1,5 +1,5 @@
-Angular
-====== 
+Learn Front End Development with Angular
+========================================
  
 Are you building a web applications with pages that need to be created dynamically? Do you need to write logic in your HTML?  Are your pages interactive and use JavaScript? If your are building a non trivial website that uses more than HTML and CSS, you will more than likely benefit from using a front end framework like Angular. Angular allows you to organize your code and give it structure plus it is capable of solving the aforementioned problems and then some.  This tutorial will walk you through building a web app for a bookstore using Angular.  You should already have an understanding of JavaScript.
  
@@ -12,6 +12,7 @@ Table of Contents
 - [Routing](#routing)
 - [Directives](#directives)
 - [Review](#review)
+- [Exercise](#excercise)
 - [Resources](#resources)
  
 Getting started
@@ -450,12 +451,18 @@ Do the same for our book detail view:
 **[Back to top](#table-of-contents)**
 
 Review
---------------------------------------------------------
+----------------
 
 Controllers interact with our data and render it to our view.  We created a book controller that was responsible for managing a list of books and individual books. To get the book data we used a service.  Services aren't tied to any controller.  Therefore, they can be used in multiple controllers for a particular module.  To use a service, you inject it as a dependency inside the controller.  
 
 Another feature of Angular is the ability to create a single page application.  Instead having multiple html pages, we use one base html page and inject each view into it.  To achieve this, we configure our routes with use of the `ngRoute` module.  Each route will have a path that is connected to a template and a controller.  Lastly, we dealt with directives whose purpose is to provide us with reusable UI components in keeping with the DRY principle.
  
+ 
+**[Back to top](#table-of-contents)**
+
+Exercise
+----------------
+
 For further learning, you should continue building out the app.  Here are some suggestions:
  
 1. Add the functionality to create a book.
