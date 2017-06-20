@@ -23,10 +23,10 @@ describe('Book Controller', function() {
   });
  
   it('should have two books', function(done) {
-    //bookService.get().then(function(response) {
-      //books = response.data;
-      expect(bookCtrl().books.length).toEqual(2); 
-    //});
+    
+    bookService.get().then(function(response) {
+      expect(bookCtrl.books.length).toEqual(2); 
+    });
     
     done();
   });

@@ -9,8 +9,8 @@ Table of Contents
 - [Getting Started](#getting-started)
 - [Controllers](#controllers)
 - [Services and Factories](#services-and-factories)
-- [Directives](#directives)
 - [Routing](#routing)
+- [Directives](#directives)
 - [Automating Browser Tests with Protractor](#automating-browser-tests-with-protractor)
 - [Resources](#resources)
  
@@ -70,7 +70,13 @@ This directory structure groups our code by feature.  This setup is preferable b
 </html>
 ```
  
-To get started, create an `index.html` file. Create a lib folder and save a copy of the Angular library to it.  You can download Angular from here: [https://angularjs.org/]. Include the script in the head of your file.  Next, create an `app` folder with an `app.module.js` file inside.  This file will define our Angular app and be responsible for tying together all other modules. A module is a container for our application code. It is a good practice to define modules in a file of their own.  In the following example a module named `app` is created. 
+To get started, create an `index.html` file. Create a lib folder and save a copy of the Angular library to it.  You can download Angular from here: [https://angularjs.org/]. Or you can include this script in the head of your file:
+
+```html
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+```
+
+Next, create an `app` folder with an `app.module.js` file inside.  This file will define our Angular app and be responsible for tying together all other modules. A module is a container for our application code. It is a good practice to define modules in a file of their own.  In the following example a module named `app` is created. 
  
 ```javascript
 //app.module.js
@@ -250,22 +256,115 @@ In our controller we used `BookController.$inject = ['Books']` so that we could 
 
 
 **[Back to top](#table-of-contents)**
+  
+
+Routing
+-----------
+ 
+If you want to make an app with multiple views, you can use Angular's `ngRoute` module. Routing lets us map URLs to views. Currently, we have one page that shows all of the books.   We will turn this into a view that is injected into our index page when a request is made to `/books`.  To get started, add the `ngRoute` library to the head of your html file.  You can download the library and save it to your lib folder or use can use the following script:
+ 
+```html
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-route.js"></script>
+```
+ 
+Next, add the `ngRoute` module as a dependency to your books module:
+ 
+```js
+//books.module.js
+ 
+angular.module('app.books', ['ngRoute']);
+```
+ 
+Now, we will remove the html in our index page that displays the books and put it into its own view.  Create a file named `books.html` and save it to the books folder. Put this inside of it:
+ 
+```html
+<div ng-repeat="book in bookCtrl.books">
+   <h4>{{ book.title }} by {{ book.author }}<h4>
+   <input type="text" ng-model="book.title">
+</div>
+```
+ 
+Remove the controller from the index page and add the `ng-view` directive.  Your index page should now look like this:
+ 
+```html
+<body>
+    <div>
+        <ng-view></ng-view>
+    </div>
+```
  
  
+On to configuring our routes.  Create a file named `books.routes.js` and save it to the books folder.  Put the following code inside the file:
+ 
+```javascript
+//books.routes..js
+ 
+(function() {
+  angular
+    .module('app.books')
+    .config(config);
+   
+  config.$inject = ['$routeProvider'];
+ 
+  function config($routeProvider){
+    $routeProvider
+      .when('/books', {
+      templateUrl: 'app/books/books.html',
+      controller: 'BookController',
+      controllerAs: 'bookCtrl'
+    });
+  };
+ 
+})();
+```
+ 
+Include the routes file in your index page. To view the books route, navigate your browser to the path `/#!/books`.  Angular adds `/#!` to the URL. There are ways to remove it.  Now let’s create a view for each individual book. The first thing we will do is configure the route.  Add the following code to the end of the current route:
+ 
+```javascript
+//books.routes.js
+ 
+.when('/books/:bookId', {
+  templateUrl: 'app/books/book-detail.html',
+  controller: 'BookController',
+  controllerAs: 'bookCtrl'
+ });
+```
+ 
+The part of the path that contains `:bookId` is a parameter.  For this app, we will use the book’s index in the array to represent it’s ID.  Next, we need to update our controller to handle getting a book.  
+ 
+```javascript
+BookController.$inject = ['Books', '$routeParams'];
+ 
+  function BookController(Books, $routeParams){
+    let vm = this;
+ 
+    Books.get().then(function(response) {
+      vm.books = response.data;
+      vm.book = vm.books[$routeParams.bookId];
+    }, function(error){
+      console.log(error);
+    });
+  }
+```
+ 
+First, we inject `$routeParams` into the controller so that we can get the value of the parameter. Then we create a book variable to store the object located at the particular ID.  Finally, we create the html.
+ 
+```html
+<!-- book-detail.html -->
+ 
+<h4>{{ bookCtrl.book.title }} by {{ bookCtrl.book.author }}<h4>
+```
+ 
+When you navigate your browser to the path `/#!/books/0` you should see the text **Oliver Twist by Charles Dickens**.  And if you navigate to `/#!/books/1` you should see **Tale of Two Cities by Charles Dickens**.
+ 
+
+**[Back to top](#table-of-contents)**
+
 Directives
 --------------
  
 **[Back to top](#table-of-contents)**
- 
-Automating Tests
-------------------------
- 
-**[Back to top](#table-of-contents)**
- 
-Routing
------------
- 
-**[Back to top](#table-of-contents)**
+
  
 Automating Browser Tests with Protractor
 --------------------------------------------------------
