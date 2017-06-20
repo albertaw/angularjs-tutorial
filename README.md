@@ -362,7 +362,91 @@ When you navigate your browser to the path `/#!/books/0` you should see the text
 
 Directives
 --------------
+
+I have been using the term directive but I haven't explained what it means.  Angular has its own directives which begin with `ng`.  For example, `ng-controller` and `ng-repeat`.  A directive is an html attribute that extends the functionality of elements. With Angular we can also create our own directives. When we want to make our own reusable HTML components, or if we need to manipulate the DOM we use a directive. 
+
+Our books view displays the same information as our book detail view.  
  
+```javascript
+//books.html
+ 
+<h4>{{ book.title }} by {{ book.author }}<h4>
+ 
+//book-detail.html
+ 
+<h4>{{ bookCtrl.book.title }} by {{ bookCtrl.book.author }}<h4>
+```
+ 
+This duplication can be eliminated by creating a directive.  Create a file named `book-info.directive.js` and save it to the books folder.  Include the file in your index page and add the following code to it:
+ 
+```js
+//book-info.directive.js
+ 
+function() {
+  angular
+    .module('app.books')
+    .directive('bookInfo', bookInfo);
+ 
+  function bookInfo() {
+    let directive = {
+      restrict: 'EA',
+      templateUrl: app/books/'book-info.directive.html',
+      scope: {
+        data: '='
+      },
+      controller: 'BookController',
+      controllerAs: 'bookCtrl',
+    };
+     
+    return directive;
+    
+  }
+})();
+```
+The `restrict` property specifies how the directive will be used. In the above example `‘EA’` means the directive can only be invoked as an element:
+ 
+```html
+<book-info></book-info>
+```
+Or as an attribute:
+ 
+```html
+<div book-info></div>
+```
+We could have also called our directive using class or comment syntax.  Note how the directive was named `bookInfo` but it was written as `book-info` in the html. If a directive name has more than one word in it, camelcase has to be used to define it.  When it is invoked in the html, each word will be lowercased and separated with a hyphen. 
+ 
+The `scope` property is used to set a directive's scope. This is useful so that we can link the book data in our controller to this particular element.  Inside the scope property we specify the name of the attribute we will use in the directive, `data`, to pass in our book data.  
+
+Create a file named book-info.html and save it to the books folder.  Here is what our template should look like:
+ 
+```html
+<!-- book-info.html -->
+ 
+<h4>{{ data.title }} by {{ data.author }}<h4>
+```
+ 
+In the books view we can replace the html for showing a book with our directive.
+ 
+```html
+<!-- books.html -->
+ 
+<body ng-controller="BookController as bookCtrl">
+  <div ng-repeat="book in bookCtrl.books">
+      <book-info data="book"></book-info>
+      <input type="text" ng-model="book.title">
+  </div>
+</body>
+```
+ 
+Do the same for our book detail view:
+ 
+```html
+<!-- book-detail -->
+ 
+<book-info data="bookCtrl.book"></book-info>
+```
+ 
+
 **[Back to top](#table-of-contents)**
 
  
