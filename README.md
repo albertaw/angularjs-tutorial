@@ -1,4 +1,4 @@
-Learn Front End Development with Angular
+Build a Web App with Angular
 ========================================
  
 Are you building a web applications with pages that need to be created dynamically? Do you need to write logic in your HTML?  Are your pages interactive and use JavaScript? If your are building a non trivial website that uses more than HTML and CSS, you will more than likely benefit from using a front end framework like Angular. Angular allows you to organize your code and give it structure plus it is capable of solving the aforementioned problems and then some.  This tutorial will walk you through building a web app for a bookstore using Angular.  You should already have an understanding of JavaScript.
